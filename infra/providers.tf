@@ -4,6 +4,14 @@ terraform {
     azurerm = {
       source  = "hashicorp/azurerm"
       version = "~> 3.117"
+backend "azurerm" {
+  resource_group_name  = "rg-najla-devopsproj2"
+  storage_account_name = "najlaatfstateacct"
+  container_name       = "tfstate"
+  key                  = "terraform.tfstate"
+}
+
+
     }
   }
 }
