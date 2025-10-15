@@ -20,6 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+
     env:
       TF_IN_AUTOMATION: "true"
       RG_NAME: rg-najla-devopsproj2
@@ -30,25 +31,34 @@ jobs:
       TF_VAR_sql_admin_password: ${{ secrets.SQL_PASSWORD }}
 
     steps:
+      # 1️⃣ سحب الكود
       - uses: actions/checkout@v4
-      - name: Import RG if not in state
-        run: |
-         terraform state list | grep -q '^azurerm_resource_group.rg$' || \
-         terraform import azurerm_resource_group.rg "/subscriptions/4421688c-0a8d-4588-8dd0-338c5271d0af/resourceGroups/rg-najla-devopsproj2"
 
+      # 2️⃣ تثبيت Terraform (لازم قبل أي أمر terraform)
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.8.4
 
+      # 3️⃣ Init (لازم قبل import)
       - name: Terraform Init
         working-directory: infra
-        run: terraform init -input=false
+        run: terraform init -input=false -reconfigure
 
+      # 4️⃣ Import الـRG إذا ما كان في الـstate
+      - name: Import RG if not in state
+        working-directory: infra
+        run: |
+          terraform state list | grep -q '^azurerm_resource_group.rg$' || \
+          terraform import azurerm_resource_group.rg \
+          "/subscriptions/4421688c-0a8d-4588-8dd0-338c5271d0af/resourceGroups/rg-najla-devopsproj2"
+
+      # 5️⃣ Validate
       - name: Terraform Validate
         working-directory: infra
         run: terraform validate -no-color
 
+      # 6️⃣ Plan
       - name: Terraform Plan
         if: ${{ github.event.inputs.action != 'apply' }}
         working-directory: infra
@@ -56,6 +66,7 @@ jobs:
           terraform plan -input=false -no-color -out=tfplan
           terraform show -no-color tfplan > plan.txt
 
+      # 7️⃣ رفع نتيجة الـplan كملف artifact
       - name: Upload plan artifact
         if: ${{ github.event.inputs.action != 'apply' }}
         uses: actions/upload-artifact@v4
@@ -63,6 +74,7 @@ jobs:
           name: terraform-plan
           path: infra/plan.txt
 
+      # 8️⃣ Apply
       - name: Terraform Apply
         if: ${{ github.event.inputs.action == 'apply' }}
         working-directory: infra
