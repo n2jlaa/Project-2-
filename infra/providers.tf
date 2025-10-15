@@ -12,7 +12,7 @@ terraform {
     resource_group_name  = "rg-najla-devopsproj2"
     storage_account_name = "najlaatfstateacct"
     container_name       = "tfstate"
-    key                  = "infra.terraform.tfstate"
+    key                  = "terraform.tfstate"
     # لو تبي تستخدمين Azure AD بدلاً من access key:
     # use_azuread_auth = true
   }
