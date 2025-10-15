@@ -51,7 +51,7 @@ graph TD
 
 ### ✅ Main Terraform Tasks
 - Create Resource Group, VNet, and Subnets (frontend, backend, appgw, sql)
-- Deploy Application Gateway (WAF v2)
+- Deploy Application Gateway
 - Deploy Azure SQL Database (Private Endpoint)
 - Deploy Azure Container Apps Environment (internal load balancer)
 - Deploy Frontend & Backend Container Apps
@@ -85,7 +85,7 @@ graph TD
 ## ✅ Validation Checklist
 - [x] SQL Private Endpoint (Public access disabled)
 - [x] Container Apps in private subnet
-- [x] Application Gateway WAFv2 routing correct
+- [x] Application Gateway outing correct
 - [x] Terraform automated full deployment
 - [x] App Insights integrated with Container Apps
 
