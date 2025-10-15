@@ -1,0 +1,5 @@
+project_name       = "devopsproj2najla"
+rg_name            = "rg-najla-devopsproj2"
+location           = "japanest"
+sql_admin_user     = "sqladminuser"
+sql_admin_password = "Ironhack-sda7"
