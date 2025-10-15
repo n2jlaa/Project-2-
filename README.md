@@ -31,7 +31,7 @@ The application is a **Burger Builder** web app built with:
 
 ```mermaid
 graph TD
-  User[👩‍💻 User] -->|HTTPS| AppGW[Azure Application Gateway WAFv2]
+  User[👩‍💻 User] -->|HTTP| AppGW[Azure Application Gateway ]
   AppGW -->|/ →| FE[Frontend - React/Vite Container App]
   AppGW -->|/api/* →| BE[Backend - Java Spring Boot Container App]
   FE --> BE
