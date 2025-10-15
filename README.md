@@ -8,7 +8,7 @@ The application is a **Burger Builder** web app built with:
 - ⚙️ **Backend:** Java + Spring Boot + Maven  
 - 💾 **Database:** Azure SQL Database (private endpoint only)  
 - ☁️ **Hosting:** Azure Container Apps (private environment, internal load balancer)  
-- 🌐 **Ingress:** Application Gateway WAF v2 (HTTPS only)  
+- 🌐 **Ingress:** Application Gateway 
 
 ---
 
@@ -21,7 +21,7 @@ The application is a **Burger Builder** web app built with:
 | **Backend** | Azure Container App (Spring Boot) | REST API for burger ingredients & orders |
 | **Database** | Azure SQL Database | Stores app data; access restricted to VNet only |
 | **Networking** | VNet + Subnets + NSGs | Frontend, backend, SQL each in its own subnet |
-| **Ingress** | Application Gateway (WAF v2) | Only public entry point; routes `/` → frontend, `/api/*` → backend |
+| **Ingress** | Application Gateway | Only public entry point; routes `/` → frontend, `/api/*` → backend |
 | **Monitoring** | Log Analytics + Application Insights | Centralized logging and metrics |
 | **Registry** | Azure Container Registry (ACR) | Stores built Docker images |
 
@@ -96,12 +96,6 @@ Application is fully functional at:
 
 **Frontend:**  
 👉 `http://48.210.248.193` (via App Gateway)
-
-**Backend:**  
-👉 `https://devopsproj2najla-backend.wonderfulpebble-d34e3f53.japaneast.azurecontainerapps.io/api/health`
-
-**Database:**  
-Private SQL Endpoint — accessible only from inside VNet.
 
 ---
 
