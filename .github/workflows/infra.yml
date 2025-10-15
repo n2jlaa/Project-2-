@@ -31,6 +31,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      - name: Import RG if not in state
+        run: |
+         terraform state list | grep -q '^azurerm_resource_group.rg$' || \
+         terraform import azurerm_resource_group.rg "/subscriptions/4421688c-0a8d-4588-8dd0-338c5271d0af/resourceGroups/rg-najla-devopsproj2"
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
