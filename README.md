@@ -35,7 +35,7 @@ graph TD
   AppGW -->|/ →| FE[Frontend - React/Vite Container App]
   AppGW -->|/api/* →| BE[Backend - Java Spring Boot Container App]
   FE --> BE
-  BE -->|JDBC over Private Endpoint| SQL[(Azure SQL Database)]
+  BE -->|Private Endpoint| SQL[(Azure SQL Database)]
   subgraph Azure VNet
     FE
     BE
