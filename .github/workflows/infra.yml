@@ -45,13 +45,7 @@ jobs:
         working-directory: infra
         run: terraform init -input=false -reconfigure
 
-      # 4️⃣ Import الـRG إذا ما كان في الـstate
-      - name: Import RG if not in state
-        working-directory: infra
-        run: |
-          terraform state list | grep -q '^azurerm_resource_group.rg$' || \
-          terraform import azurerm_resource_group.rg \
-          "/subscriptions/4421688c-0a8d-4588-8dd0-338c5271d0af/resourceGroups/rg-najla-devopsproj2"
+
 
       # 5️⃣ Validate
       - name: Terraform Validate
